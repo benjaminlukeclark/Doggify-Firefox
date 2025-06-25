@@ -1,99 +1,113 @@
-# Doggify
-[![Github latest release](https://img.shields.io/badge/Github%20Latest%20Release-1.1.1-green.svg)](https://github.com/Sudoblark/Doggify-Firefox/releases)
+> 🧪 **Side Project | Experimental Demo**  
+> This Firefox extension, created circa 2019, brings a playful “doggify” twist to your browsing.  
+> Built for fun and experimentation — not intended for production use.  
+> Fully functional, but unsupported and unmaintained.  
+>   
+> 🐶 Because sometimes, the internet just needs more dogs.
 
-[![Firefox stable release](https://img.shields.io/badge/Firefox%20Stable%20Release-1.1.1-green.svg)](https://addons.mozilla.org/en-GB/firefox/addon/doggify/)
+---
 
-This is an extension for firefox that will let you:
-- Automatically replace all images on a webpage with doggos
-- Change your preference for what breed of doggo is displayed via an addon settings menu
-- Right click an image and doggify it
+# 🐾 Doggify-Firefox
 
-You can turn off the automatic replacement of images in the extension's settings menu.
+A whimsical Firefox WebExtension that transforms your browsing experience by adding dog-themed flair. Originally built as a weekend project to explore browser APIs, DOM manipulation, and WebExtension architecture.
 
-Check it out [here](https://addons.mozilla.org/en-GB/firefox/addon/doggify/) on Firefox!
+---
 
-Click [here](https://sudoblark.github.io/Doggify-Firefox/) for the Github page!
+## 🧠 Features
 
-## Acknowledgements
-Icon by [Freepik](https://www.flaticon.com/authors/freepik) from [Flaticon](www.flaticon.com)
+- 🐕 Replaces certain images and words on webpages with dog-themed equivalents
+- ⚙️ Includes a configurable settings screen (via `about:addons`)
+- 🧩 Built as a lightweight Firefox WebExtension
+- 🔁 Live DOM manipulation using content scripts
+- 🌐 Local development & distribution ready (signed `.xpi` support)
 
-Uses the [dog-ceo-api](https://dog.ceo/dog-api/) by [ElliottLandsborough](https://github.com/ElliottLandsborough) with the source code in this [repo](https://github.com/ElliottLandsborough/dog-ceo-api)
+---
 
+## 🚀 Getting started
 
-## Overview
-### Continous Doggos
-When enabled the plugin will automatically replace all images on a webpage with dogs. 
-
-It will then check for pictures not populated by the extension every second, and replace these with dog pictures. This should mean that images dynamically injected into the page are replaced with dogs relatively quickly.
-
-Say for example someone is searching for some nasty cades on google images. Normally, they would see something similar to this:
-
-![NastyCades](documentation/overview/NastyCades.PNG)
-
-But once this extension is installed all we see are lovely doggos!
-
-![LovelyDoggos](documentation/overview/LovelyDoggos.PNG)
-
-### Doggify an image
-This extension extends the Firefox context menu to include a "Doggify me!" option whenever clicking on an image:
-
-![Doggify-me-pre](documentation/doggify/Doggify-me-pre.png)
-
-If you select this option then the image in question will be changed to a doggo.
-
-![Doggify-me-post](documentation/doggify/Doggify-me-post.PNG)
-
-
-## Settings
-This can be accessed in firefox by going to "options > addons > extensions > doggify > options".
-
-![Doggify-me-post](documentation/settings/Settings.PNG)
-
-Remember to "save" when you make changes to the settings menu!
-
-## Future Plans
-- Dynamically resize dog image 
-
-## Setup Checklist
-
-Simply add the extension in Firefox: https://addons.mozilla.org/en-GB/firefox/addon/doggify/
-
-## Development/Debugging
-- Download repo
-- Open the [about:debugging](https://developer.mozilla.org/en-US/docs/Tools/about:debugging) page in Firefox
-- Navigate to the repo and select the ```manifest.json``` file
-- Select "Inspect" to see the web console for the settings page
-
-Note: Adding an extension via the method above only adds it for that session of Firefox; if you close then start Firefox again the Doggify extension will not be loaded.
-
-Any changes you make to existing files should update automatically on a page refresh, although sometimes you'll need to close and open Firefox again.
-
-### Extension Anatomy
-
-[beautiful-doggos](beautiful-doggos.js) is the content script injected into webpages that:
-- First replaces all images with dogs if continous doggos is enabled
-- Sets up a timer to replace all non-dog images every second is continous doggos is enabled
-- Listens for requests from the background script
-
-[background](background.js) is the background script, it will:
-- Create the "Doggify me!" context menu
-- Sends messages to the content script on context menu click
-
-The [icons](icons) folder contains icons for the entire extension to consumed by the manifest and context menu items
-
-The [settings](settings) folder contains [HTML](settings/settings.html)/[CSS](settings/settings.css)/[JS](settings/settings.js) relating to the settings page displayed to the user via addons > extensions > Doggify > options. It uses ```browser.storage.sync.set``` to set preferences, whilst the background script uses ``` browser.storage.sync.get``` to get these preferences.
-
-## Compatibility
-- The iteration of images HTMLCollection is done via the following syntax:
-
-```js
-for (let image of imagecollection ) {
-    // stuff
-}
+### 1. Clone the repo
+```bash
+git clone https://github.com/benjaminlukeclark/Doggify-Firefox.git
 ```
 
-- HTMLCollection seems to be compatible on most modern browsers: https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection
-- Let seems to also be compatible on most modern browser, with IE needing to be at least version 11: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let
+### 2. Load the extension in Firefox
+1. Navigate to `about:debugging#/runtime/this-firefox`
+2. Click **Load Temporary Add-on**
+3. Select any file in the project directory (e.g., `manifest.json`)
 
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+---
+
+## ⚙️ Configuration
+
+After installing, visit `about:addons` and locate **Doggify**.  
+Click the **Preferences** button to open the settings screen.  
+You can adjust:
+
+- Select a specific breed of dog to use when replacing images
+- Choose how aggressively to “doggify” web pages
+
+![Settings screen for Doggify](documentation/settings/Settings.PNG)
+
+---
+
+## 💡 Example usage
+
+Visit your favorite news or blog site with Doggify enabled.  
+Watch images get replaced with dog-themed equivalents.
+
+![Original web page before Doggify](documentation/overview/NastyCades.PNG)
+
+![Dog-themed transformation applied](documentation/overview/LovelyDoggos.PNG)
+
+You can also manually “doggify” specific images via a context menu option.
+
+![Before Doggify transformation](documentation/doggify/Doggify-me-pre.png)
+
+![After Doggify transformation](documentation/doggify/Doggify-me-post.PNG)
+
+---
+
+## 🛠 Tech stack
+
+- JavaScript
+- Firefox WebExtension APIs
+- DOM manipulation
+
+---
+
+## 🧪 Status & notes
+
+- 🔸 Experimental and no longer maintained
+- 🔸 Created as a creative exercise — no tests or CI/CD
+- 🔸 Still works in modern Firefox as of 2025
+
+---
+
+## 📦 Project structure
+
+```
+Doggify-Firefox/
+├── icons/             # Extension icons
+├── scripts/           # Content and background scripts
+├── options.html       # Settings/preferences screen
+├── manifest.json      # Extension metadata
+└── README.md
+```
+
+---
+
+## 🐶 License
+
+[MIT License](./LICENSE)
+
+---
+
+## 📬 Contact
+
+Made with 💻 by [Benjamin Luke Clark](https://github.com/benjaminlukeclark)  
+See more projects at [sudoblark.com](https://sudoblark.com)
+
+---
+
+![status: experimental](https://img.shields.io/badge/status-experimental-orange)
+![tech: WebExtension](https://img.shields.io/badge/tech-WebExtension-blue)
